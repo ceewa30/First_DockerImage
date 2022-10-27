@@ -14,6 +14,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the first-docker Docker image
         run: |
-          docker build -t . ghcr.io/ceewa30/first-docker-gcr:latest
+          docker build . -t ghcr.io/ceewa30/first-docker-gcr:latest
           docker run ghcr.io/ceewa30/first-docker-gcr:latest
           docker push ghcr.io/ceewa30/first-docker-gcr:latest

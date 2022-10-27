@@ -1,0 +1,19 @@
+#publish your docker image to github container registry
+name: publish
+on: [push]
+jobs:
+  publish-first-dockerimage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/heckout@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the first-docker Docker image
+        run: |
+          docker build . --tag ghcr.io/ceewa30/First_DockerImage:latest
+          docker run ghcr.io/ceewa30/First_DockerImage:latest
+          docker push ghcr.io/ceewa30/First_DockerImage:latest
